@@ -50,3 +50,24 @@ export const cancelAppointment = async (id) => {
     );
     return response.data;
 };
+
+// Create Razorpay Order
+export const createPaymentOrder = async (doctorId) => {
+    const response = await axios.post(
+        `${API_URL.replace('/appointments', '/payments')}/create-order`,
+        null,
+        { params: { doctorId } }
+    );
+
+    return response.data;
+};
+
+// Verify Payment
+export const verifyPayment = async (paymentData) => {
+    const response = await axios.post(
+        'http://localhost:8080/api/payments/verify',
+        paymentData
+    );
+
+    return response.data;
+};
