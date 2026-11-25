@@ -28,12 +28,23 @@ function Login() {
 
             alert("Login successful!");
 
-            navigate('/dashboard');
+            // Navigate according to user role
+            if (response.role === 'PATIENT') {
+                navigate('/patient-dashboard');
+            }
+            else if (response.role === 'DOCTOR') {
+                navigate('/doctor-dashboard');
+            }
+            else if (response.role === 'ADMIN') {
+                navigate('/admin-dashboard');
+            }
+            else {
+                alert("Invalid user role received from backend");
+            }
 
         } catch (error) {
 
             console.log("Login Error:", error.response?.data);
-
             console.log("Status Code:", error.response?.status);
 
             if (error.response) {
@@ -52,7 +63,6 @@ function Login() {
     }
 
     return (
-
         <div className="container mt-5">
 
             <div className="row justify-content-center">
@@ -67,7 +77,6 @@ function Login() {
 
                         <form onSubmit={handleSubmit(onSubmit)}>
 
-                            {/* Email Field */}
                             <div className="mb-3">
 
                                 <label className="form-label">
@@ -89,7 +98,6 @@ function Login() {
 
                             </div>
 
-                            {/* Password Field */}
                             <div className="mb-3">
 
                                 <label className="form-label">
@@ -111,7 +119,6 @@ function Login() {
 
                             </div>
 
-                            {/* Login Button */}
                             <button
                                 type="submit"
                                 className="btn btn-primary w-100"

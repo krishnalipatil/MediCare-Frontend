@@ -1,35 +1,78 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import RegisterChoice from './pages/RegisterChoice';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+// Authentication pages
+import Login from './pages/Login';
 import DoctorRegister from './pages/DoctorRegister';
 import PatientRegister from './pages/PatientRegister';
-<<<<<<< HEAD
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
 
-=======
->>>>>>> fe47e0c1f3b0ca8d50405698173b43f187ff4a3b
+// Dashboard pages
+import PatientDashboard from './pages/PatientDashboard';
+import DoctorDashboard from './pages/DoctorDashboard';
+
+// Doctor pages
+import DoctorList from './pages/DoctorList';
+
+// Appointment pages
+import BookAppointment from './pages/BookAppointment';
+import MyAppointments from './pages/MyAppointments';
+import DoctorAppointments from './pages/DoctorAppointments';
 
 function App() {
-  return (
-    <BrowserRouter>
 
-      <Routes>
+    return (
+        <BrowserRouter>
+            <Routes>
 
-        <Route path="/" element={<RegisterChoice />} />
-      <Route path="/register/doctor" element={<DoctorRegister/>} />
-      <Route path="/register/patient" element={<PatientRegister />} />
+                {/* Default Route */}
+                <Route path="/" element={<Navigate to="/login" />} />
 
-<<<<<<< HEAD
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-=======
+                {/* Authentication Routes */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register/doctor" element={<DoctorRegister />} />
+                <Route path="/register/patient" element={<PatientRegister />} />
 
->>>>>>> fe47e0c1f3b0ca8d50405698173b43f187ff4a3b
-      </Routes>
+                {/* Dashboard Routes */}
+                <Route
+                    path="/patient-dashboard"
+                    element={<PatientDashboard />}
+                />
 
-    </BrowserRouter>
-  );
+                <Route
+                    path="/doctor-dashboard"
+                    element={<DoctorDashboard />}
+                />
+
+                <Route
+                    path="/admin-dashboard"
+                    element={<h2>Admin Dashboard</h2>}
+                />
+
+                {/* Doctor Routes */}
+                <Route path="/doctors" element={<DoctorList />} />
+
+                {/* Appointment Routes */}
+                <Route
+                    path="/book-appointment/:doctorId"
+                    element={<BookAppointment />}
+                />
+
+                <Route
+                    path="/appointments"
+                    element={<MyAppointments />}
+                />
+
+                <Route
+                    path="/doctor-appointments"
+                    element={<DoctorAppointments />}
+                />
+
+                {/* Invalid Route */}
+                <Route path="*" element={<Navigate to="/login" />} />
+
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
